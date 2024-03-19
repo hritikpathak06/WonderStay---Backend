@@ -20,7 +20,7 @@ exports.registerUser = async (req, res) => {
     }
     const file = req.file;
     // Upload profile image to Cloudinary
-    const result = await cloudinary.uploader.upload(file.path);
+    const myCloud = await cloudinary.uploader.upload(file.path);
 
     const user = new User({
       firstName,
@@ -28,8 +28,8 @@ exports.registerUser = async (req, res) => {
       email,
       password,
       profileImage: {
-        public_id: result.public_id,
-        url: result.secure_url,
+        public_id: myCloud.public_id,
+        url: myCloud.secure_url,
       },
     });
 
