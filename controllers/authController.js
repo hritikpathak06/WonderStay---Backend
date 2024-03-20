@@ -95,3 +95,29 @@ exports.loginUser = async (req, res) => {
     });
   }
 };
+
+// Get My Profile
+exports.getMyProfile = async (req, res) => {
+  const user = await User.findById(req.user._id);
+  return res.status(200).json({
+    success: true,
+    user,
+  });
+};
+
+
+// Logout
+exports.logoutUser = async (req, res) => {
+  res
+    .status(200)
+    .cookie("token", null, {
+      expires: new Date(0),
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+    })
+    .json({
+      success: true,
+      message: "user logged out successfully",
+    });
+};
