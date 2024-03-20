@@ -7,6 +7,7 @@ const dotenv = require("dotenv");
 const connectDB = require("./database/db");
 const authRoutes = require("./routes/authRoutes");
 const cloudinary = require("cloudinary");
+const listingRoutes = require("./routes/listingRoutes");
 
 const app = express();
 
@@ -38,6 +39,7 @@ app.use(morgan("common"));
 
 // Routes
 app.use("/api/v1/auth",authRoutes);
+app.use("/api/v1/listing",listingRoutes);
 
 
 app.get("/",(req,res) => {
