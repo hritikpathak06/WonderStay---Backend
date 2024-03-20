@@ -70,3 +70,26 @@ exports.createNewListing = async (req, res) => {
     }
   };
   
+
+  // Get Listing By Categories Controller 
+  exports.getListingsByCategory = async(req,res) => {
+    try {
+      const qCategory = req.query.category;
+      let listings;
+      if(qCategory){
+         listings = await Listing.find({
+          category:qCategory
+        }).populate("creator")
+      }else{
+        listings = await Listing.find().populate("creator")
+      }
+      res.status(200).json({
+        success:true,
+        listings
+      })
+    } catch (error) {
+      res.status(500)
+        .json({ message: "Failed to create listing", 
+        error: err.message });
+    }
+  }
