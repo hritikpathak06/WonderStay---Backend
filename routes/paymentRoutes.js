@@ -8,7 +8,7 @@ const { isAuthenticated } = require("../middlewares/auth");
 const router = express.Router();
 
 router.route("/key").get(isAuthenticated, getKey);
-router.route("/checkout").post( isAuthenticated,checkout);
-router.route("/verify").post( isAuthenticated,  paymentVerification);
+router.route("/checkout").post( checkout);
+router.route("/verify").post(  paymentVerification);
 
 module.exports = router;

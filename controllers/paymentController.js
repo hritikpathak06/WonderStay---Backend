@@ -44,7 +44,7 @@ exports.paymentVerification = async (req, res) => {
 
     res.redirect(
       `https://wonderstay.vercel.app/paymentsuccess?reference=${razorpay_payment_id}`
-      )
+    );
   } else {
     res.status(400).json({
       success: false,
