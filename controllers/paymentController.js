@@ -42,12 +42,9 @@ exports.paymentVerification = async (req, res) => {
       razorpay_signature,
     });
 
-    // res.redirect(
-    //   // `https://wonderstay.vercel.app/paymentsuccess?reference=${razorpay_payment_id}`
-      res.redirect(
-        `https://wonderstay.vercel.app`
+    res.redirect(
+      `https://wonderstay.vercel.app/paymentsuccess?reference=${razorpay_payment_id}`
       )
-    // );
   } else {
     res.status(400).json({
       success: false,
