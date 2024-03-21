@@ -5,7 +5,7 @@ const dotenv = require("dotenv").config();
 
 const instance = new RazorPay({
   key_id: process.env.RAZORPAY_PUBLIC_KEY,
-  key_secret:process.env.RAZORPAY_SECRET_KEY,
+  key_secret: process.env.RAZORPAY_SECRET_KEY,
 });
 
 // Checkout Handler
@@ -42,8 +42,8 @@ exports.paymentVerification = async (req, res) => {
       razorpay_signature,
     });
 
-      res.redirect(
-        `http://localhost:5173/paymentsuccess?reference=${razorpay_payment_id}`
+    res.redirect(
+      `https://wonderstay.vercel.app/paymentsuccess?reference=${razorpay_payment_id}`
     );
   } else {
     res.status(400).json({
