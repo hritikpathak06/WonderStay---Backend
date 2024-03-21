@@ -8,6 +8,9 @@ const connectDB = require("./database/db");
 const authRoutes = require("./routes/authRoutes");
 const cloudinary = require("cloudinary");
 const listingRoutes = require("./routes/listingRoutes");
+const bookingRoutes = require("./routes/bookingRoutes");
+const paymentsRoutes = require("./routes/paymentRoutes");
+const userRoutes = require("./routes/userRoutes");
 
 const app = express();
 
@@ -29,22 +32,28 @@ app.use(express.json({}));
 app.use(cookieParser());
 app.use(
   cors({
-    // origin: "*",
-    origin:"http://localhost:5173",
-    credentials:true
+    // origin:"http://localhost:5173",
+    origin: "https://wonderstay.vercel.app",
+    credentials: true,
   })
 );
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan("common"));
 
+
+
 // Routes
-app.use("/api/v1/auth",authRoutes);
-app.use("/api/v1/listing",listingRoutes);
+app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/listing", listingRoutes);
+app.use("/api/v1/booking", bookingRoutes);
+app.use("/api/v1/payment", paymentsRoutes);
+app.use("/api/v1/user",userRoutes);
 
 
-app.get("/",(req,res) => {
-  res.send("hello Server")
-})
+// Test Server
+app.get("/", (req, res) => {
+  res.send("hello Server");
+});
 
 //Port config
 const port = process.env.PORT || 9000;

@@ -19,7 +19,6 @@ exports.registerUser = async (req, res) => {
       });
     }
     const file = req.file;
-    // Upload profile image to Cloudinary
     const myCloud = await cloudinary.uploader.upload(file.path);
 
     const user = new User({
