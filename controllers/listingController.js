@@ -70,6 +70,33 @@ exports.createNewListing = async (req, res) => {
   }
 };
 
+
+// Get listing by searh Controller
+exports.getListingsBySearch = async (req, res) => {
+  try {
+    const { search } = req.params;
+    let listings = [];
+    if (search === "all") {
+      listings = await Listing.find().populate("creator");
+    } else {
+      listings = await Listing.find({
+        $or: [
+          { category: { $regex: search, $options: "i" } },
+          { title: { $regex: search, $options: "i" } },
+        ],
+      }).populate("creator");
+      return res.status(200).json({
+        success: true,
+        listings,
+      });
+    }
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Failed to create listing", error: error.message });
+  }
+};
+
 // Get Listing By Categories Controller
 exports.getListingsByCategory = async (req, res) => {
   try {

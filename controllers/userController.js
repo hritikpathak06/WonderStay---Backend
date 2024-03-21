@@ -81,7 +81,30 @@ exports.getPropertyList = async (req, res) => {
       properties,
     });
   } catch (error) {
-    console.log(err);
+    console.log(error);
     res.status(404).json({ error: error.message });
   }
 };
+
+// Get Reservation List Controller
+exports.getReservationList = async(req,res) => {
+  try {
+    const reservations = await Booking.find({
+      hostId:req.user._id
+    }).populate("customerId hostId listingId");
+
+    if(!reservations){
+      return res.status(404).json({
+        success:false,
+        message:"No Reservation Found"
+      })
+    }
+    return res.status(200).json({
+      success:true,
+      reservations
+    })
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({ error: error.message });
+  }
+}
